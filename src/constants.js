@@ -1,0 +1,8 @@
+export let first_api = "FIRST_API"
+export let combined_data = "COMBINED_DATA"
+export let all_data = "ALL_DATA"
+export let all_ids = "ALL_ID"
+export let carts= "ALL_CARTDATA"
+export let deletingcarts = "DELETING_CARTS"
+export let india_rate = "INDIARATES"
+export let all_total ="ALLTOTAL"
