@@ -1,4 +1,4 @@
-import { all_data, all_ids, all_total, carts, combined_data, deletingcarts, first_api, india_rate } from "./constants"
+import { all_data, all_ids, all_total, carts, combined_data, deletingcarts, first_api, india_rate, sub_all_total } from "./constants"
 
 export let addSetProducts  = (text)=>{
     return{
@@ -72,7 +72,7 @@ export let storingTotal = (text)=>{
 export let sub_storingTotal = (text)=>{
 
     return{
-        type:all_total,
+        type:sub_all_total,
         payload:text
     }
 }

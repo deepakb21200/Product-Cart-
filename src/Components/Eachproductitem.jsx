@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "../Cart.css";
 import { useDispatch, useSelector } from "react-redux";
-import { allcart_delete, Allid, storingTotal } from "../actions";
-export default function Eachproductitem({
+import { allcart_delete, Allid, storingTotal, sub_storingTotal } from "../actions";
+import { sub_all_total } from "../constants";
+ export default function Eachproductitem({
   thumbnail,
   brand,
   title,
   price,
   unique,
   index,
+  cat
 }) {
   let dispatch = useDispatch()
 
@@ -42,7 +44,7 @@ let [counter, setCounter] = useState(1)
 
  
   let all_cart_data = useSelector((state) => state.all_cart_data);
-  console.log(all_cart_data, "allcartdata", all_cart_data.length);
+  console.log(all_cart_data, "allcartdata", all_cart_data.length,"second");
 
   let iid = useSelector((state) => state.iid);
 
@@ -55,16 +57,20 @@ let [counter, setCounter] = useState(1)
 
     m.push(k[1]);
     dispatch(Allid(m));
+ dispatch(sub_storingTotal(r[2]))
+ console.log(r[2],typeof r[2],"r[2");
+ 
   }
 
 
 
 
   function adding(r){
-    if(counter<=9){
+    if(counter<10){
         setCount([count[0] + r])
         setCounter(counter+1)
         dispatch(storingTotal(r))
+    console.log({id: index, total_price: convertedPrice2, category: cat});
     
     }
         
@@ -82,9 +88,19 @@ let [counter, setCounter] = useState(1)
 alert("min")}
 
 else{
+
+
+  console.log(r);
+  
  setCount([count[0] - r])
  setCounter(counter-1)
- dispatch(storingTotal(r))
+//  dispatch(storingTotal(r))
+ dispatch(sub_storingTotal(r))
+
+
+ sub_storingTotal
+
+
 
 }
 
@@ -108,7 +124,7 @@ else{
 
             <button className="qty-btn"  onClick={()=>adding(convertedPrice2)}>+</button>
 
-            <button className="delete-btn" onClick={() => deleting([index, unique])}>Delete</button>
+            <button className="delete-btn" onClick={() => deleting([index, unique,count[0]])}>Delete</button>
           </div>
         </div>
       </div>
@@ -120,7 +136,6 @@ else{
 
 
 
-
-
+ 
 
 

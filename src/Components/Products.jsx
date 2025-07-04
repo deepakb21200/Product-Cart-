@@ -25,10 +25,15 @@ let indiaR =useSelector((state) => state.indiaR)
 
     const fetchAllCategoriesData = async () => {
       try {
-        let res2 = await fetch("https://v6.exchangerate-api.com/v6/1549cab85e4125398dcd8dfe/latest/USD")
-        let new_res2 = await res2.json()
-        console.log(new_res2.conversion_rates.INR)
-        dispatch(storingCurrency(new_res2.conversion_rates.INR))
+        // let res2 = await fetch("https://v6.exchangerate-api.com/v6/1549cab85e4125398dcd8dfe/latest/USD")
+        // let new_res2 = await res2.json()
+        // console.log(new_res2.conversion_rates.INR)
+
+
+ let new_res2 =85
+
+        // dispatch(storingCurrency(new_res2.conversion_rates.INR))
+          dispatch(storingCurrency(new_res2))
         
 
         
@@ -49,6 +54,7 @@ let indiaR =useSelector((state) => state.indiaR)
           
         })
 
+console.log(allCategoryData);
 
             dispatch(addSetProducts(arr)) /////2
             dispatch(Allset(arr))//////3

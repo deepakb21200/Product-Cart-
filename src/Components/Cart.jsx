@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import '../Cart.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { allcart_delete, Allid } from '../actions'
+// import { allcart_delete, Allid } from '../actions'
 import Eachproductitem from './Eachproductitem'
 
 
@@ -14,25 +14,25 @@ export default function Cart() {
 
 let dispatch = useDispatch()
  let all_cart_data = useSelector((state) => state.all_cart_data)
-console.log(all_cart_data,"allcartdata",all_cart_data.length);
+console.log(all_cart_data,"allcartdata",all_cart_data.length,"first");
 
-  let iid =  useSelector(state => state.iid)
+  // let iid =  useSelector(state => state.iid)
 let  grandTotal = useSelector((state) => state.grandTotal)
-function deleting(r){
-    let k = [...all_cart_data]
-    k.splice(r[0],1)
-dispatch(allcart_delete(k))
-let m = [...iid]
+// function deleting(r){
+//     let k = [...all_cart_data]
+//     k.splice(r[0],1)
+// dispatch(allcart_delete(k))
+// let m = [...iid]
 
-m.push(k[1])
-dispatch(Allid(m))
-
-
+// m.push(k[1])
+// dispatch(Allid(m))
 
 
 
 
- }
+
+
+//  }
 
 
 
@@ -71,7 +71,7 @@ return ele
 
 }).map((elea,ins)=>{
     return <Eachproductitem key={ins} thumbnail ={elea[3]} brand={elea[1] }title={elea[4]} price={elea[2]}
-     unique={elea[0]} index={ins}/>
+     unique={elea[0]} index={ins} cat= {elea[5]}/>
 })}
 
 

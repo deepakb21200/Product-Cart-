@@ -1,5 +1,5 @@
 import { sub_storingTotal } from "./actions";
-import { all_data, all_ids, all_total, carts, combined_data, deletingcarts, first_api, india_rate } from "./constants";
+import { all_data, all_ids, all_total, carts, combined_data, deletingcarts, first_api, india_rate, sub_all_total } from "./constants";
 import { initialState } from "./initialState";
 
 
@@ -88,7 +88,7 @@ export let reducerfn = (state= initialState,action)=>{
 
 
 
-        case sub_storingTotal:{
+        case sub_all_total:{
 
 let new_data = state.grandTotal - action.payload
 
@@ -139,8 +139,8 @@ let new_data = state.grandTotal - action.payload
 
 
 
-        let a = "2"
-        let b = "2"
+        // let a = "2"
+        // let b = "2"
 
-        console.log(a-b);
+        // console.log(a-b);
         

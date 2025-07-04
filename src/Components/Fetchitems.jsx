@@ -35,7 +35,7 @@ function addingCart(e){
  
 
 // dispatch(allcart([moving.current]))
-dispatch(allcart([element.id,element.brand,element.price,element.thumbnail,element.title]))
+dispatch(allcart([element.id,element.brand,element.price,element.thumbnail,element.title,element.category]))
 dispatch(storingTotal(Number(Math.round(element.price * indiaR))))
 
 {/* <Cart elementbrand ={element.brand} elementprice ={element.price} elementthumbnail={element.thumbnail}
