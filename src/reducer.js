@@ -31,7 +31,7 @@ export let reducerfn = (state= initialState,action)=>{
 
 
 
-        case carts :{
+        case carts :{ ///allcart ka action creator
              let new_data = [...state.all_cart_data,action.payload]
            
              
@@ -50,8 +50,8 @@ export let reducerfn = (state= initialState,action)=>{
 
 
 
-        case deletingcarts :return{
-         
+        case deletingcarts :return{           /// ye action creators hai
+                                        //deletingcarts ye constant hai 
                 ...state,
                  all_cart_data:action.payload
           
@@ -70,8 +70,9 @@ export let reducerfn = (state= initialState,action)=>{
 
 
 
-        case all_total: {
+        case all_total: {               //storingTotal is case ka action creater
              let new_data = state.grandTotal + action.payload
+console.log(new_data);
 
 // console.log("typeof action.payload",typeof action.payload,             "typeof state.grandtotal",                     
 //     typeof state.grandTotal,"value of action.paylaod",               action.payload);
@@ -88,9 +89,12 @@ export let reducerfn = (state= initialState,action)=>{
 
 
 
-        case sub_all_total:{
+        case sub_all_total:{               //sub_storingTotal is case ka action creater
+console.log("before applyng actionload on deltetting button", state.grandTotal);
 
 let new_data = state.grandTotal - action.payload
+
+console.log("after applyng actionload on deltetting button",new_data,"new_data jo return karega");
 
               return{
                 ...state,

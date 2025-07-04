@@ -18,6 +18,10 @@ const [isAdded, setIsAdded] = useState(false);
 
   let iid =  useSelector(state => state.iid)
 // let indiaR =useSelector((state) => state.indiaR)
+
+
+
+
 function addingCart(e){
 
   if(actual.current.style.background == "black"){

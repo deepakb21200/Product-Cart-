@@ -70,7 +70,7 @@ all_cart_data.map((ele)=>{
 return ele
 
 }).map((elea,ins)=>{
-    return <Eachproductitem key={ins} thumbnail ={elea[3]} brand={elea[1] }title={elea[4]} price={elea[2]}
+    return <Eachproductitem key={elea[0]} thumbnail ={elea[3]} brand={elea[1] }title={elea[4]} price={elea[2]}
      unique={elea[0]} index={ins} cat= {elea[5]}/>
 })}
 

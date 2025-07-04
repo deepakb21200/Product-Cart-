@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Cart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { allcart_delete, Allid, storingTotal, sub_storingTotal } from "../actions";
-import { sub_all_total } from "../constants";
+// import { sub_all_total } from "../constants";
  export default function Eachproductitem({
   thumbnail,
   brand,
@@ -18,6 +18,7 @@ import { sub_all_total } from "../constants";
 // console.log(typeof price, "type of price");
 
 
+// console.log("first time render due to cart component");
 
   
 
@@ -51,26 +52,33 @@ let [counter, setCounter] = useState(1)
 
   function deleting(r) {
     let k = [...all_cart_data];
-    k.splice(r[0], 1);
+    console.log("value of r before deltet",r);
+    let dk =r[0]
+    k.splice(dk, 1);
     dispatch(allcart_delete(k));
     let m = [...iid];
+console.log(r,"value of r");
 
     m.push(k[1]);
     dispatch(Allid(m));
  dispatch(sub_storingTotal(r[2]))
- console.log(r[2],typeof r[2],"r[2");
+//  console.log(r[2],typeof r[2],"r[2");
+// console.log(r[],"value of subtotals");
+
  
   }
 
 
 
 
-  function adding(r){
+  function adding(r){   //convertedPrice2,count[0]
     if(counter<10){
-        setCount([count[0] + r])
+
+        setCount([count[0] + r[0]])
         setCounter(counter+1)
-        dispatch(storingTotal(r))
-    console.log({id: index, total_price: convertedPrice2, category: cat});
+        dispatch(storingTotal(r[0]))
+    // console.log({id: index, total_price: convertedPrice2, category: cat});
+    console.log("convertedprice2 from adding ", convertedPrice2);
     
     }
         
@@ -82,7 +90,7 @@ let [counter, setCounter] = useState(1)
 
 
 
-  function substracting(r){
+  function substracting(r){ 
     if(counter==1){
 
 alert("min")}
@@ -92,13 +100,13 @@ else{
 
   console.log(r);
   
- setCount([count[0] - r])
+ setCount([count[0] - r[0]])
  setCounter(counter-1)
-//  dispatch(storingTotal(r))
- dispatch(sub_storingTotal(r))
+
+ dispatch(sub_storingTotal(r[0]))
 
 
- sub_storingTotal
+   console.log("convertedprice2 from subtracting ", r[0],"and",r[1]);
 
 
 
@@ -118,11 +126,11 @@ else{
           <div className="item-price">{convertedPrice2}</div>
           <div className="item-subtotal">Subtotal: {count[0]} </div>
           <div className="item-qty">
-            <button className="qty-btn" onClick={()=>substracting(convertedPrice2)}>-</button>
+            <button className="qty-btn" onClick={()=>substracting([convertedPrice2,count[0]])}>-</button>
 
             <div className="qty-value">{counter}</div>
 
-            <button className="qty-btn"  onClick={()=>adding(convertedPrice2)}>+</button>
+            <button className="qty-btn"  onClick={()=>adding([convertedPrice2,count[0]])}>+</button>
 
             <button className="delete-btn" onClick={() => deleting([index, unique,count[0]])}>Delete</button>
           </div>
