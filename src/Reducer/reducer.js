@@ -1,15 +1,34 @@
 
 export let initialState = {
- 
     allCombineData:[],
     first:"",
-    setfirst:""
-    
-     
+    setfirst:"",
+    INR:"",
+    cartDetails:[]
 
 }
 
- 
+
+export let indiarate = (text)=>{
+    return{
+        type:"rate",
+        payload:text
+    }
+}
+
+
+export let cart = (text)=>{
+    return{
+        type:"allcart",
+        payload:text
+    }
+}
+
+
+
+
+
+
 
 export let combinedset  = (text)=>{
     return{
@@ -66,8 +85,27 @@ export let reducerfn = (state= initialState,action)=>{
             }
         }
 
+         case "rate":{             
+              return{
+              ...state,
+            INR: action.payload
+            }
+        }
 
+         case "allcart" :{ // iske action ka naam hai = cart
+             let new_data = [...state.cartDetails,action.payload]
+
+             console.log(new_data);
+             
+           
+             
+            return{
+                ...state,
+                 cartDetails:new_data
+            }
+
+        }
           default:
-      return state
+             return state
   
     }}

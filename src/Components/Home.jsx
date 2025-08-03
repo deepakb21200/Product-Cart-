@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Product_Each from './Product_Each';
 import { categories } from '../Categories/categories';
 import { useDispatch, useSelector} from 'react-redux';
-import { combinedset, data1, data2 } from '../Reducer/reducer';
+import { combinedset, data1, data2, indiarate } from '../Reducer/reducer';
 import Header from '../Components/Header'
 
 
@@ -12,17 +12,14 @@ function Home() {
 
  
 
-let counting = useRef([]);
+
  
 let arr = []
-let arr2 = []
+
 const [first, setfirst] = useState([])
 
 
-useEffect(()=>{
-  console.log("first", first);
-  
-},[first])
+
 
      useEffect(() => {
 
@@ -32,10 +29,8 @@ useEffect(()=>{
         // let new_res2 = await res2.json()
         // console.log(new_res2.conversion_rates.INR)
 
+        // dispatch(indiarate(new_res2.conversion_rates.INR))
 
-  //  let new_res2 =85
-
-        // dispatch(storingCurrency(new_res2.conversion_rates.INR))
 
         const promises = categories.map(async (category) => {
          var res = await fetch(

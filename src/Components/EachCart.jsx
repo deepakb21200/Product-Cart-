@@ -1,26 +1,28 @@
  import "../cart.css"
-function EachCart() {
+function EachCart(props) {
+  console.log(props);
+  
   return (
      <>
       <div className="cart-item">
-        <img src={thumbnail} alt="iPhone 9" />
+        <img src={props.thumbnail} alt="iPhone 9" />
         <div className="item-info">
-          <div className="item-brand">Brand: {brand}</div>
-          <div className="item-title">{title}</div>
-          <div className="item-price">{eachPrice}</div>
-          <div className="item-subtotal">Subtotal: {price} </div>
+          <div className="item-brand">Brand: {props.brand}</div>
+          <div className="item-title">{props.title}</div>
+          <div className="item-price">{props.eachPrice}</div>
+          <div className="item-subtotal">Subtotal: {props.price} </div>
           <div className="item-qty">
-            <button className="qty-btn" onClick={() => substracting([unique, 1, eachPrice,false])}>
+            <button className="qty-btn" >
               -
             </button>
 
-            <div className="qty-value">{quantity}</div>
+            <div className="qty-value"></div>
 
-            <button className="qty-btn" onClick={() => adding([unique, 1, eachPrice, true])}>
+            <button className="qty-btn" >
               +
             </button>
 
-            <button className="delete-btn" onClick={() => deleting(index, price )}>
+            <button className="delete-btn">
               Delete
             </button>
 
