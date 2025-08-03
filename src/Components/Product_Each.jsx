@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { cart } from '../Reducer/reducer';
+import { cart, total } from '../Reducer/reducer';
 
-function Product_Each({element}) {
+function Product_Each({data}) {
 //  let rate = useSelector((state) => state.INR)
-
+let images = useRef()
  let new_Rs = 85
 let [isAdded, setAdded] = useState(false)
 
@@ -14,53 +14,58 @@ let [isAdded, setAdded] = useState(false)
  let optimizedImage = (url) =>{
   return `https://res.cloudinary.com/dcb3u3vy8/image/fetch/${url}`}
 
+
+
+  function changeimage(e){
+
+      if(data.thumbnail != e || data.thumbnail == e){
+       images.current.classList.add("fade-out");
+    setTimeout(() => {
+      images.current.src = e;
+      images.current.classList.remove("fade-out"); 
+    }, 300); 
+  
+  }
+  }
+
 function addToCart(e){
-  setAdded(tru)
+  setAdded(true)
  dispatch(cart(e))
+ dispatch(total([true,Math.floor(data.price * new_Rs)]))
 
 }
 
   return (
       <>
      <div className={`product-card justify-between product-content `}>
-    <img src={optimizedImage(element.thumbnail)} alt={element.brand}  className="fade-image"  loading="lazy"/>
-    <div>
+    <img src={optimizedImage(data.thumbnail)} alt={data.brand}  className="fade-image"
+      loading="lazy" ref={images}/> <div>
+
       <div>
-       <div className="product-title">{element.title}</div>
-      <div className="product-description">
-       {element.description}
-      </div>
+        <div className="product-title">{data.title}</div>
 
-      <div className="product-price">₹{Math.floor(element.price * new_Rs).toLocaleString("en-IN")} <span className="product-discount">
-        -{element.discountPercentage}%
-        </span></div>
+      <div className="product-description">{data.description}</div>
 
-      <div className="product-meta">⭐ {element.rating} | Stock: {element.stock} | {element.brand}</div>
+      <div className="product-price">₹{Math.floor(data.price * new_Rs).toLocaleString("en-IN")}
+        <span className="product-discount">-{data.discountPercentage}%</span>
+        </div>
+
+      <div className="product-meta">⭐ {data.rating} | Stock: {data.stock} | {data.brand}</div>
  
-     <div className="gallery">
-        <img src={ optimizedImage(element.images[0])}  alt="1" onClick={()=>changeimage(element.thumbnail)} 
+      <div className="gallery">
+        <img src={ optimizedImage(data.images[0])}  alt={data.title} onClick={()=>changeimage(data.thumbnail)} 
         loading="lazy"/>
-        <img src={ optimizedImage(element.images[1])} alt="2" onClick={()=>changeimage(element.images[1])} 
+        <img src={ optimizedImage(data.images[1])} alt="2" onClick={()=>changeimage(data.images[1])} 
         loading="lazy"/>
-        <img src={ optimizedImage(element.images[2])} alt="3" onClick={()=>changeimage(element.images[2])}  
+        <img src={ optimizedImage(data.images[2])} alt="3" onClick={()=>changeimage(data.images[2])}  
         loading="lazy"/>
       </div>  
 
-     
-      {/* <button className="add-btn"  onClick={addingCart} >Add to Cart</button> */}
-
-        {/* <button onClick={addingCart} style={{ background: isAdded ? "black" : "",color: isAdded ? "white" : ""}} 
-        className="add-btn" id={element.category+element.id}>
-        {isAdded ? "Item Added" : "Add to Cart"}
-      </button> */}
-
-
-
          <div>
-        <button  className="add-btn" onClick={()=>{addToCart(element)}} 
+        <button  className="add-btn" onClick={()=>{addToCart(data)}} 
         style={{ background: isAdded ? "black" : "",color: isAdded ? "white" : ""}}>
             {isAdded ? "Item Added" : "Add to Cart"} 
-  {/* {iid.includes(element.category + element.id) ? "Item Added" : "Add to Cart"} */}</button>
+       </button>
 
          <Link to="/cart" ><button className="view-cart-btn">View Cart</button></Link> 
         </div>

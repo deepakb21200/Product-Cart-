@@ -2,9 +2,10 @@
 export let initialState = {
     allCombineData:[],
     first:"",
-    setfirst:"",
-    INR:"",
-    cartDetails:[]
+
+    INR:"", //iska use maine nhi kiya hai isko app avoid hi kijiye
+    cartDetails:[],
+    grandTotal :0
 
 }
 
@@ -53,6 +54,23 @@ export let data2  = (text)=>{
 
 
 
+export let deleteSpecific  = (text)=>{
+    return{
+        type:"deleteS",
+        payload:text
+    }
+}
+
+
+export let total  = (text)=>{
+    return{
+        type:"Total",
+        payload:text
+    }
+}
+
+
+
 
 export let reducerfn = (state= initialState,action)=>{
     switch(action.type){
@@ -67,8 +85,6 @@ export let reducerfn = (state= initialState,action)=>{
 
         case "data1":{
 
-            // console.log("data1",action.payload);
-            
               return{
               ...state,
             first: action.payload
@@ -78,7 +94,7 @@ export let reducerfn = (state= initialState,action)=>{
 
         case "data2":{
 
-            //  console.log("data2",action.payload);
+     
               return{
               ...state,
             setfirst: action.payload
@@ -102,9 +118,47 @@ export let reducerfn = (state= initialState,action)=>{
             return{
                 ...state,
                  cartDetails:new_data
-            }
+            }  
 
         }
+
+
+            case "deleteS" :{ 
+                console.log(action.payload);
+                
+                let new_cartDetails = [...state.cartDetails]
+                let new_data = state.grandTotal - action.payload[1]
+             new_cartDetails.splice(action.payload[0], 1)
+       
+            return{
+                ...state,
+                 cartDetails:new_cartDetails,
+                 grandTotal:new_data
+            }  
+
+        }
+
+
+         case "Total" :{ 
+             let new_data
+              if(action.payload[0]){
+                 new_data = state.grandTotal + action.payload[1]
+              }else{
+                 new_data = state.grandTotal - action.payload[1]
+              }
+            return{
+                ...state,
+                 grandTotal:new_data
+            }  
+
+        }
+
+
+
+
+
+
+
           default:
              return state
   
