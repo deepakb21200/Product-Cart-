@@ -9,25 +9,20 @@ import { useSelector } from 'react-redux'
 function Header(props) {
 
 
-// let first = useSelector((state) => state.allCombineData)
-
+let first = useSelector((state) => state.allCombineData)
  let second = useSelector((state) => state.first)
-
-
+ 
 let arr =useRef([])
+
+
 function filtered(index,event){
 if(event.target.checked && index <=9){
-
       arr.current.push(...second[index].products)
-      console.log(arr.current,"arr.current");
+      // console.log(arr.current,"arr.current");
     props.data2([...arr.current])
-
-
 }
 else if(event.target.checked == false){
-
 let g = arr.current.filter(item => item.category !== event.target.value)
-
 if(g.length ==0){
 arr.current =[]
 return
@@ -37,7 +32,7 @@ arr.current = g
 props.data2([...g])
 }
 else{
-
+props.data2(first)
 }
 }
 

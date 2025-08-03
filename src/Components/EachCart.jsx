@@ -13,10 +13,14 @@ function EachCart(props, index) {
 
   let dispatch = useDispatch()
 
+   let optimizedImage = (url) =>{
+  return `https://res.cloudinary.com/dcb3u3vy8/image/fetch/${url}`}
+
+
   return (
      <>
       <div className="cart-item">
-        <img src={props.thumbnail} alt={props.title} />
+        <img src={optimizedImage(props.thumbnail)} alt={props.title} />
         <div className="item-info">
           <div className="item-brand">Brand: {props.brand}</div>
           <div className="item-title">{props.title}</div>
