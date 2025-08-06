@@ -36,8 +36,6 @@ props.data2(first)
 }
 }
 
-
-
   return (
        <>
          <div className="filter-container font-bold" style={{display:"flex", justifyContent:"center", marginTop:"25px"}} >

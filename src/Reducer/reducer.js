@@ -74,7 +74,7 @@ export let total  = (text)=>{
 
 export let reducerfn = (state= initialState,action)=>{
     switch(action.type){
-         case "ALL_DATA":{
+         case "ALL_DATA":{ //iska action creator hia = combinedset aur ye home component me use kara useeffect me 
               return{
               ...state,
             allCombineData: action.payload
@@ -101,14 +101,14 @@ export let reducerfn = (state= initialState,action)=>{
             }
         }
 
-         case "rate":{             
+         case "rate":{      // iske aap ignore kardiijye iskoi use ni kara ahi       
               return{
               ...state,
             INR: action.payload
             }
         }
 
-         case "allcart" :{ // iske action ka naam hai = cart
+         case "allcart" :{ // iske action ka naam hai = cart aur ye product_ceach component me use kara.
              let new_data = [...state.cartDetails,action.payload]
 
              console.log(new_data);
@@ -123,7 +123,7 @@ export let reducerfn = (state= initialState,action)=>{
         }
 
 
-            case "deleteS" :{ 
+            case "deleteS" :{  // iska action creator hai = deleteSpecific aur ye eachcart component me use karahi.
                 console.log(action.payload);
                 
                 let new_cartDetails = [...state.cartDetails]
@@ -139,7 +139,7 @@ export let reducerfn = (state= initialState,action)=>{
         }
 
 
-         case "Total" :{ 
+           case "Total" :{// iska action createor hia = total aur ye each cart component me use kara
              let new_data
               if(action.payload[0]){
                  new_data = state.grandTotal + action.payload[1]

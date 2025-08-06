@@ -16,17 +16,34 @@ let [isAdded, setAdded] = useState(false)
 
 
 
-  function changeimage(e){
+  // function changeimage(e){
 
-      if(data.thumbnail != e || data.thumbnail == e){
-       images.current.classList.add("fade-out");
-    setTimeout(() => {
-      images.current.src = e;
-      images.current.classList.remove("fade-out"); 
-    }, 300); 
+  //     if(data.thumbnail != e || data.thumbnail == e){
+  //      images.current.classList.add("fade-out");
+  //   setTimeout(() => {
+  //     images.current.src = e;
+  //     images.current.classList.remove("fade-out"); 
+  //   }, 300); 
   
+  // }
+  // }
+
+  function changeimage(newSrc) {
+  // Agar image already wahi hai to kuch mat karo
+  if (images.current.src.includes(newSrc)){
+    console.log("true");
+    
+    return
   }
-  }
+console.log("false");
+
+  images.current.classList.add("fade-out");
+  setTimeout(() => {
+    images.current.src = newSrc;
+    images.current.classList.remove("fade-out");
+  }, 300);
+}
+
 
 function addToCart(e){
   setAdded(true)

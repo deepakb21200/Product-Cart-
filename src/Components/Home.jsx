@@ -39,7 +39,7 @@ const [first, setfirst] = useState([])
           return await res.json();
         });
 
-        // console.log(promises)
+        
         var allCategoryData = await Promise.all(promises)
         // console.log(allCategoryData,"main")
         dispatch(data1(allCategoryData))
@@ -52,7 +52,7 @@ const [first, setfirst] = useState([])
         // console.log(arr);
       setfirst(arr)
       dispatch(combinedset(arr))
-      // dispatch(data1(first))
+     
       dispatch(data2(setfirst))
 
       } catch (error) {
@@ -68,7 +68,8 @@ const [first, setfirst] = useState([])
   <Header data = {first} data2={setfirst}/>
    {first.length === 0 ? (<h2>No products found</h2>) : (
         <div  className='xl:w-[88vw] mx-auto flex flex-wrap xl:gap-[2vw] w-[90vw] 
-        xl:justify-start gap-[4vw] lg:gap-[1vw]'>     
+        xl:justify-start gap-[4vw] lg:gap-[1vw]'>   
+          
           {first.map((element, index) => ( 
             <Product_Each key={index} data={element} />
           ))}

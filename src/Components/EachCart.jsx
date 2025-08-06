@@ -1,12 +1,12 @@
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import "../cart.css"
-import { useDispatch, useSelector } from "react-redux";
-import { deleteSpecific, total } from "../Reducer/reducer";
+import { useDispatch, useSelector } from "react-redux"
+import { deleteSpecific, total } from "../Reducer/reducer"
 
 function EachCart(props, index) {
-  let [count, setCount] = useState(1) // user 10 quantity tak select kar sakta hia
-  let [max10, setMax10] = useState(1)
-   let [new_Rs]=  useState(85)
+  let [count, setCount] = useState(1)  // user 10 quantity tak select kar sakta hia
+  let [max10, setMax10] = useState(1) 
+  let [new_Rs]=  useState(85)
 
    
   let [price, setPrice] = useState(Math.floor(props.price * new_Rs))
@@ -35,8 +35,6 @@ function EachCart(props, index) {
                 setCount((count)=>count-1)
                setMax10(max10-1)
                 setPrice(prev => prev - Math.floor(props.price * new_Rs))
-                console.log(price);
-                
                 dispatch(total([false,Math.floor(props.price * new_Rs)]))
                 } }}>
               -
@@ -49,9 +47,7 @@ function EachCart(props, index) {
                setCount((count)=>count+1)
                setMax10(max10+1)
                setPrice(prev => prev + Math.floor(props.price * new_Rs))
-               console.log(price,"eachcart");
-               
-               dispatch(total([true,Math.floor(props.price * new_Rs)]))
+              dispatch(total([true,Math.floor(props.price * new_Rs)]))
                 }
         
             else{ alert("max up to 10")}
@@ -60,9 +56,7 @@ function EachCart(props, index) {
             </button>
 
             <button className="delete-btn" onClick={()=>{
-              // dispatch(deleteSpecific(props.index))
                     dispatch(deleteSpecific([props.index,price]))
-              // dispatch(total([false,price]))
               }}>
               Delete
             </button>
