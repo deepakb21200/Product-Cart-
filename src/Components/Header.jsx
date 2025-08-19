@@ -10,28 +10,39 @@ function Header(props) {
    let totalvalue = useSelector(state => state.cartDetails)
 let firsts = useSelector((state) => state.combinedData)
  let second = useSelector((state) => state.first)
+ let all_products = useSelector((state)=> state.combinedData)
  
 let arr =useRef([])
 
 
 function filtered(index,event){
 if(event.target.checked && index <=9){
-      arr.current.push(...second[index].products)
+ 
 
+  let a = all_products.filter((e)=> e.category == event.target.value)
+arr.current.push(...a)
     props.data2([...arr.current])
 }
 else if(event.target.checked == false){
 let g = arr.current.filter(item => item.category !== event.target.value)
+ 
+console.log(g);
+
 if(g.length ==0){
 arr.current =[]
+console.log(arr.current);
+
+ 
+
 return
 
 }
 arr.current = g
+ console.log(arr.current);
 props.data2([...g])
 }
 else{
-  props.data2(firsts)
+  props.data2(all_products)
 }
 }
 

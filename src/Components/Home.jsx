@@ -57,6 +57,10 @@ allCategoryData.forEach((element) => {
     });
   });
 });
+
+
+// console.log(arr);
+
           setAllProducts(arr)       
  
           
