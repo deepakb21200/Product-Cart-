@@ -23,7 +23,7 @@ useEffect(()=>{
 
    
     let images = useRef()
-     let new_Rs = 85
+
  
   let dispatch =useDispatch()
 
