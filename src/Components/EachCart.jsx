@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+
 import "../cart.css"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
  
  
 

@@ -1,7 +1,4 @@
-import React from 'react'
-import loader from '/loader.gif'
 import "./loader.css"
-
 
 function Loader() {
   return (

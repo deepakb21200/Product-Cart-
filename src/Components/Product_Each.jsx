@@ -4,15 +4,10 @@ import { Link } from 'react-router-dom'
 
 
 function Product_Each({data}) {
-//  let rate = useSelector((state) => state.INR)
+
 
  let combinedData = useSelector((state) => state.combinedData)
  
-
-
-  // let savedState = localStorage.getItem("allproductIDS") ? 
-  //   JSON.parse(localStorage.setItem("allproductIDS"))
-  //   : []
 
 
   const [isAdded, setAdded] = useState(

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Product_Each from './Product_Each';
 import { categories } from '../Categories/categories';
 import { useDispatch, useSelector} from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useRef} from 'react'
 import { Link } from 'react-router-dom'
 import "../header.css"
 import { lists } from '../Lists/List'
@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
  
  
 function Header(props) {
-   const totalvalue = useSelector(state => state.cartDetails)
+   let totalvalue = useSelector(state => state.cartDetails)
 let firsts = useSelector((state) => state.combinedData)
  let second = useSelector((state) => state.first)
  
@@ -17,7 +17,7 @@ let arr =useRef([])
 function filtered(index,event){
 if(event.target.checked && index <=9){
       arr.current.push(...second[index].products)
-      
+
     props.data2([...arr.current])
 }
 else if(event.target.checked == false){
