@@ -60,7 +60,7 @@ function addToCart(product){
      <div className={`product-card justify-between pt-0 pr-4 pb-4 pl-4 
        mx-[15px] 2xl:mx-[10px] `} style={{boxShadow: '0px 4px 12px rgba(0,,0,0.5)'}}>
     <img src={optimizedImage(data.thumbnail)} alt={data.brand}  className="fade-image"
-      ref={images}/> <div>
+      ref={images} loading="lazy"/> <div>
 
       <div>
         <div className="product-title">{data.title}</div>
@@ -74,9 +74,11 @@ function addToCart(product){
       <div className="product-meta">⭐ {data.rating} | Stock: {data.stock} | {data.brand}</div>
  
       <div className="gallery">
-        <img src={ optimizedImage(data.images[0])}  alt={data.title} onClick={()=>changeimage(data.thumbnail)}/>
-        <img src={ optimizedImage(data.images[1])} alt="2" onClick={()=>changeimage(data.images[1])}/>
-        <img src={ optimizedImage(data.images[2])} alt="3" onClick={()=>changeimage(data.images[2])}/>
+        <img src={ optimizedImage(data.images[0])}  alt={data.title} onClick={()=>changeimage(data.thumbnail)} loading="lazy"/>
+        <img src={ optimizedImage(data.images[1])} alt="2" onClick={()=>changeimage(data.images[1])}
+        loading="lazy"/>
+        <img src={ optimizedImage(data.images[2])} alt="3" onClick={()=>changeimage(data.images[2])}
+        loading="lazy"/>
       </div>  
 
          <div>
