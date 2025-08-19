@@ -10,6 +10,7 @@ body {
 }
 
 .product-card {
+  min-width: 300px;
   width: 300px;
   background: #fff;
   border-radius: 10px;
@@ -31,9 +32,6 @@ body {
   object-fit: cover;
 }
 
-.product-content {
-  padding: 0px 16px 16px 16px;
-}
 
 .product-title {
   font-size: 18px;
@@ -45,8 +43,7 @@ body {
   font-size: 13px;
   color: #666;
   margin-bottom: 10px;
-  /* height: 32px;
-      overflow: hidden; */
+
 }
 
 .product-price {

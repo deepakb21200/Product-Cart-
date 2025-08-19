@@ -2,79 +2,117 @@ import React, { useEffect, useRef, useState } from 'react'
 import Product_Each from './Product_Each';
 import { categories } from '../Categories/categories';
 import { useDispatch, useSelector} from 'react-redux';
-import { combinedset, data1, data2, indiarate } from '../Reducer/reducer';
+import { all_products,  data1} from '../Reducer/reducer';
 import Header from '../Components/Header'
-
+import Loader from './loader';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function Home() {
  let dispatch = useDispatch()
- useSelector((state) => state.allCombineData)
+  let [allProducts, setAllProducts] = useState([])  
+  let [hasMore, setHasMore] = useState(true);
+ 
+  let [visibleProducts, setVisibleProducts] = useState([]); 
+
+let [savedState] = useState(() => {
+  let cartState = localStorage.getItem("cartDetails");
+  if (cartState) {
+    let parsed = JSON.parse(cartState);
+    
+    return parsed || [];
+  }
+
+  
+  return [];
+})
 
  
-
-
- 
-let arr = []
-
-const [first, setfirst] = useState([])
-
-
-
-
      useEffect(() => {
 
-    const fetchAllCategoriesData = async () => {
+    let fetchAllCategoriesData = async () => {
       try {
-        // let res2 = await fetch("https://v6.exchangerate-api.com/v6/1549cab85e4125398dcd8dfe/latest/USD")
-        // let new_res2 = await res2.json()
-        // console.log(new_res2.conversion_rates.INR)
-
-        // dispatch(indiarate(new_res2.conversion_rates.INR))
-
-
-        const promises = categories.map(async (category) => {
-         var res = await fetch(
-            `https://dummyjson.com/products/category/${category}`
-          );
+        let promises = categories.map(async (category) => {
+         let res = await fetch(`https://dummyjson.com/products/category/${category}`);
           return await res.json();
-        });
-
-        
-        var allCategoryData = await Promise.all(promises)
-        // console.log(allCategoryData,"main")
-        dispatch(data1(allCategoryData))
-
-        // console.log(...allCategoryData,"alls");
-        
-        allCategoryData.map((element)=>{
-               arr.push(...element.products)     
         })
-        // console.log(arr);
-      setfirst(arr)
-      dispatch(combinedset(arr))
-     
-      dispatch(data2(setfirst))
+        let allCategoryData = await Promise.all(promises)     
+        let arr = []
+        dispatch(data1(allCategoryData))
+       
+
+   
+
+allCategoryData.forEach((element) => {
+  element.products.forEach((product) => {
+ 
+    //by default clicked value false
+    let alreadyClickedProduct = savedState.find(p => p.id === product.id);
+ 
+    
+
+    arr.push({
+      ...product,
+      isclicked: alreadyClickedProduct ? alreadyClickedProduct.isclicked : false,
+      price: Math.floor(product.price*85)
+    });
+  });
+});
+          setAllProducts(arr)       
+ 
+          
+      dispatch(all_products(arr))
+ 
 
       } catch (error) {
-        console.error("Error fetching category data:", error);
+        console.error("Error fetching category data:", error.message);
       }
     };
 
     fetchAllCategoriesData()
   }, []);
+  
+
+useEffect(() => {
+
+  if (allProducts.length > 0) {
+  setVisibleProducts(allProducts.slice(0, 10));
+  setHasMore(allProducts.length > 10);
+ 
+       
+
+    }
+
+}, [allProducts]);
+
+
+let fetchMoreData = () => {
+  let nextProducts = allProducts.slice(visibleProducts.length, visibleProducts.length + 10);
+  setVisibleProducts([...visibleProducts, ...nextProducts]);
+  setHasMore(visibleProducts.length + nextProducts.length < allProducts.length);
+};
+
 
   return (
   <>
-  <Header data = {first} data2={setfirst}/>
-   {first.length === 0 ? (<h2>No products found</h2>) : (
-        <div  className='xl:w-[88vw] mx-auto flex flex-wrap xl:gap-[2vw] w-[90vw] 
-        xl:justify-start gap-[4vw] lg:gap-[1vw]'>   
-          
-          {first.map((element, index) => ( 
-            <Product_Each key={index} data={element} />
-          ))}
-        </div>
+       <Header data={allProducts} data2={setAllProducts} />
+      {allProducts.length === 0 ? <Loader /> : (
+        <InfiniteScroll dataLength={visibleProducts.length} next={fetchMoreData}
+         hasMore={hasMore}  scrollThreshold="250px" 
+          loader={<div className="w-full text-center py-4" >
+            <span>Loading...</span>
+            </div>}>
+
+            <div className="w-[90vw]  mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+                gap-[5px] lg:justify-start xl:flex xl:flex-wrap  xl:gap-[6vw] place-items-center 
+                items-stretch 2xl:gap-[1vw]  ">
+
+            {visibleProducts.map((element, index) => (
+              <Product_Each key={index} data={element} />
+            ))}
+          </div>
+        </InfiniteScroll>
       )}
+
  </>
   )
 }

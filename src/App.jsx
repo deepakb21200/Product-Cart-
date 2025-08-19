@@ -8,18 +8,12 @@ import Cart from './Components/Cart'
 function App() {
   return (
     <>
-    
-
-
-
-    <Routes>
+     <Routes>
 <Route path="/" element={ <> <Home/>
     </>}/> 
  
 
 <Route path="/cart" element={<Cart />}/> 
-
-
 </Routes>
 
     </>

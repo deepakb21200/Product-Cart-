@@ -1,18 +1,15 @@
    .filter-container {
-      display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 20px;
+  
     }
 
     .filter-option {
       background: #fff;
       border-radius: 6px;
       padding: 6px 10px;
-      display: flex;
-      justify-content: center;
+      display: flex;    
       align-items: center;
-        
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     }
 
@@ -22,18 +19,15 @@
     }
 
 
-     .go-home-box {
-   
-    text-align: center;
- }
+ 
 
- .home-btn {
+.my-home-btn {
   
  border: none;
    background-color: #007bff;
  color: white;
   text-decoration: none;
-   /* border-radius: 6px; */
+
   font-weight: bold;
    transition: all 0.2s ease;
   }

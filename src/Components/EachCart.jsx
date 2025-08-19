@@ -1,20 +1,39 @@
 import { useEffect, useState } from "react"
 import "../cart.css"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteSpecific, total } from "../Reducer/reducer"
+ 
+ 
 
-function EachCart(props, index) {
-  let [count, setCount] = useState(1)  // user 10 quantity tak select kar sakta hia
-  let [max10, setMax10] = useState(1) 
-  let [new_Rs]=  useState(85)
-
-   
-  let [price, setPrice] = useState(Math.floor(props.price * new_Rs))
-
+function EachCart(props) {
+let subtotal = props.qty * props.price;
+ 
   let dispatch = useDispatch()
 
    let optimizedImage = (url) =>{
   return `https://res.cloudinary.com/dcb3u3vy8/image/fetch/${url}`}
+
+
+    let handleIncrease = () => {
+    if (props.qty < 10) {
+      dispatch({ type: "UPDATEQTY", payload: {
+        id: props.id,
+        qty: props.qty + 1
+      } });
+    } else {
+     alert("You cannot add more than 10 items");
+    }
+  };
+
+  let handleDecrease = () => {
+    if (props.qty > 1) {
+      dispatch({ type: "UPDATEQTY", payload: {
+        id: props.id,
+        qty: props.qty - 1
+      } });
+    } else {
+      alert("You must have at least 1 item");
+    }
+  };
 
 
   return (
@@ -24,39 +43,21 @@ function EachCart(props, index) {
         <div className="item-info">
           <div className="item-brand">Brand: {props.brand}</div>
           <div className="item-title">{props.title}</div>
-          <div className="item-price">{Math.floor(props.price * new_Rs).toLocaleString("en-IN")}</div>
-          <div className="item-subtotal">Subtotal: {price.toLocaleString("en-IN")} </div>
+          <div className="item-price">{props.price.toLocaleString("en-IN")}</div>
+          <div className="item-subtotal">Subtotal: {subtotal.toLocaleString("en-IN")}</div>
           <div className="item-qty">
-            <button className="qty-btn" onClick={()=>{
-                if(max10==1){
-                alert("min")
-                }
-            else{
-                setCount((count)=>count-1)
-               setMax10(max10-1)
-                setPrice(prev => prev - Math.floor(props.price * new_Rs))
-                dispatch(total([false,Math.floor(props.price * new_Rs)]))
-                } }}>
+            <button className="qty-btn" onClick={handleDecrease}>
               -
             </button>
 
-            <div className="qty-value">{count}</div>
+            <div className="qty-value">{props.qty}</div>
 
-            <button className="qty-btn"  onClick={()=>{
-               if(max10<10){
-               setCount((count)=>count+1)
-               setMax10(max10+1)
-               setPrice(prev => prev + Math.floor(props.price * new_Rs))
-              dispatch(total([true,Math.floor(props.price * new_Rs)]))
-                }
-        
-            else{ alert("max up to 10")}
-               }}>
+            <button className="qty-btn"  onClick={handleIncrease}>
               +
             </button>
 
             <button className="delete-btn" onClick={()=>{
-                    dispatch(deleteSpecific([props.index,price]))
+                   dispatch({ type: "DELETEPRODUCT", payload: props.id });
               }}>
               Delete
             </button>

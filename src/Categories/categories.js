@@ -9,6 +9,4 @@
       "womens-watches",
       "mens-watches",
       "sunglasses"
-     
-    
     ];
