@@ -8,8 +8,7 @@ import { useSelector } from 'react-redux'
  
 function Header(props) {
    let totalvalue = useSelector(state => state.cartDetails)
-let firsts = useSelector((state) => state.combinedData)
- let second = useSelector((state) => state.first)
+ 
  let all_products = useSelector((state)=> state.combinedData)
  
 let arr =useRef([])
@@ -26,7 +25,7 @@ arr.current.push(...a)
 else if(event.target.checked == false){
 let g = arr.current.filter(item => item.category !== event.target.value)
  
-console.log(g);
+ 
 
 if(g.length ==0){
 arr.current =[]
