@@ -4,8 +4,9 @@ import { categories } from '../Categories/categories';
 import { useDispatch, useSelector} from 'react-redux';
 import { all_products,  data1} from '../Reducer/reducer';
 import Header from '../Components/Header'
-import Loader from './loader';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Loader from './Loader';
 
 function Home() {
  let dispatch = useDispatch()
@@ -98,8 +99,9 @@ let fetchMoreData = () => {
 
   return (
   <>
+
        <Header data={allProducts} data2={setAllProducts} />
-      {allProducts.length === 0 ? <Loader /> : (
+      {allProducts.length === 0 ?   <Loader/>: (
         <InfiniteScroll dataLength={visibleProducts.length} next={fetchMoreData}
          hasMore={hasMore}  scrollThreshold="250px" 
           loader={<div className="w-full text-center py-4" >
